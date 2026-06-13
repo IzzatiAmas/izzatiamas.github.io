@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloomIt — e-Portfolio | Nurul Izzati</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink-light: #FFE4EF;
+    --pink-mid:   #F9A8C9;
+    --pink-deep:  #C2185B;
+    --pink-dark:  #880E4F;
+    --green-light:#E8F5E9;
+    --green-mid:  #81C784;
+    --green-deep: #2E7D32;
+    --green-dark: #1B5E20;
+    --cream:      #FDFAF8;
+    --text:       #1A1A1A;
+    --text-muted: #5A5A5A;
+    --white:      #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 2px solid var(--pink-mid);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+    box-shadow: 0 2px 12px rgba(194,24,91,.1);
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: var(--pink-deep);
+    text-decoration: none;
+    letter-spacing: -.5px;
+  }
+
+  .nav-brand span { color: var(--green-deep); }
+
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: .3px;
+    transition: color .2s;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-links a:hover {
+    color: var(--pink-deep);
+    border-bottom-color: var(--pink-mid);
+  }
+
+  /* hamburger */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--pink-deep); border-radius: 2px; transition: .3s; }
+
+  @media(max-width:700px){
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 60px; left: 0; right: 0;
+      background: var(--white);
+      flex-direction: column;
+      padding: 1.2rem 2rem;
+      border-bottom: 2px solid var(--pink-light);
+      gap: .8rem;
+    }
+    .nav-links.open { display: flex; }
+  }
+
+  /* ── HERO ── */
+  #home {
+    background: linear-gradient(135deg, var(--pink-light) 0%, var(--green-light) 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #home::before {
+    content: '🌸';
+    position: absolute; top: -20px; left: -20px;
+    font-size: 180px; opacity: .07; pointer-events: none;
+    transform: rotate(-15deg);
+  }
+
+  #home::after {
+    content: '🌿';
+    position: absolute; bottom: -30px; right: -10px;
+    font-size: 200px; opacity: .07; pointer-events: none;
+    transform: rotate(10deg);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--pink-deep);
+    color: var(--white);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: .3rem .9rem;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--green-dark);
+    margin-bottom: .5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--pink-deep);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: .8rem auto 1.5rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .meta-chip {
+    background: var(--white);
+    border: 1.5px solid var(--pink-mid);
+    color: var(--pink-dark);
+    padding: .3rem .85rem;
+    border-radius: 50px;
+    font-size: .78rem;
+    font-weight: 500;
+  }
+
+  .sdg-box {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    background: var(--white);
+    border: 2px solid var(--green-mid);
+    border-radius: 14px;
+    padding: .7rem 1.4rem;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .sdg-icon { font-size: 2rem; flex-shrink: 0; }
+
+  .sdg-box p { font-size: .82rem; color: var(--text-muted); }
+  .sdg-box strong { color: var(--green-deep); font-size: .9rem; display: block; margin-bottom: .15rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 4.5rem 2rem; }
+
+  .section-label {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    background: var(--pink-light);
+    padding: .25rem .75rem;
+    border-radius: 50px;
+    margin-bottom: .8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── LABS TIMELINE ── */
+  #labs { background: var(--white); }
+
+  .timeline { position: relative; padding-left: 0; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--pink-mid), var(--green-mid));
+    border-radius: 3px;
+  }
+
+  .lab-card {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 1.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .lab-node {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--white);
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(194,24,91,.25);
+    position: relative;
+    z-index: 1;
+    align-self: start;
+    margin-top: .15rem;
+  }
+
+  .lab-body {
+    background: var(--cream);
+    border: 1.5px solid var(--pink-light);
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    transition: box-shadow .25s, transform .25s;
+  }
+
+  .lab-body:hover {
+    box-shadow: 0 8px 32px rgba(194,24,91,.12);
+    transform: translateY(-2px);
+  }
+
+  .lab-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--green-dark);
+    margin-bottom: .25rem;
+  }
+
+  .lab-tag {
+    display: inline-block;
+    font-size: .7rem;
+    background: var(--green-light);
+    color: var(--green-deep);
+    padding: .15rem .6rem;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: .8rem;
+  }
+
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--pink-light);
+    margin: .9rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    color: var(--pink-deep);
+    font-size: .82rem;
+    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    min-height: 160px;
+  }
+
+  .video-placeholder .play-icon {
+    width: 52px; height: 52px;
+    background: var(--pink-deep);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+  }
+
+  .reflection {
+    font-size: .88rem;
+    color: var(--text-muted);
+    border-left: 3px solid var(--pink-mid);
+    padding-left: .9rem;
+    margin-top: .6rem;
+    font-style: italic;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: linear-gradient(180deg, var(--pink-light) 0%, var(--green-light) 100%); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+    gap: 2rem;
+  }
+
+  @media(max-width:520px){ .projects-grid { grid-template-columns: 1fr; } }
+
+  .project-card {
+    background: var(--white);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .25s, transform .25s;
+    border: 1.5px solid var(--pink-light);
+  }
+
+  .project-card:hover {
+    box-shadow: 0 12px 40px rgba(194,24,91,.14);
+    transform: translateY(-4px);
+  }
+
+  .project-header {
+    background: linear-gradient(135deg, var(--pink-deep), var(--green-deep));
+    padding: 1.4rem 1.6rem;
+    color: var(--white);
+  }
+
+  .project-header .proj-num {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: .75;
+    margin-bottom: .3rem;
+  }
+
+  .project-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+
+  .problem-box {
+    background: var(--green-light);
+    border-radius: 10px;
+    padding: .8rem 1rem;
+    font-size: .84rem;
+    color: var(--green-dark);
+  }
+
+  .problem-box strong { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--green-deep); margin-bottom: .25rem; }
+
+  .lessons-box {
+    background: var(--pink-light);
+    border-radius: 10px;
+    padding: .8rem 1rem;
+    font-size: .84rem;
+    color: var(--pink-dark);
+  }
+
+  .lessons-box strong { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--pink-deep); margin-bottom: .25rem; }
+
+  .proj-actions {
+    display: flex;
+    gap: .75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: .5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .55rem 1.1rem;
+    border-radius: 50px;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-pink {
+    background: var(--pink-deep);
+    color: var(--white);
+  }
+
+  .btn-pink:hover { background: var(--pink-dark); transform: translateY(-1px); }
+
+  .btn-green {
+    background: var(--white);
+    color: var(--green-deep);
+    border: 2px solid var(--green-mid);
+  }
+
+  .btn-green:hover { background: var(--green-light); transform: translateY(-1px); }
+
+  /* ── REFLECTION ── */
+  #reflection { background: var(--white); }
+
+  .reflection-prose {
+    max-width: 780px;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.85;
+    position: relative;
+    padding-left: 1.8rem;
+    border-left: 4px solid var(--pink-mid);
+  }
+
+  .reflection-prose::before {
+    content: '\201C';
+    position: absolute;
+    left: -8px; top: -18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--pink-light);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: linear-gradient(135deg, var(--green-light), var(--pink-light)); }
+
+  .skills-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    max-width: 820px;
+  }
+
+  .skill-tag {
+    background: var(--white);
+    border: 1.5px solid var(--pink-mid);
+    color: var(--pink-dark);
+    padding: .4rem 1rem;
+    border-radius: 50px;
+    font-size: .82rem;
+    font-weight: 500;
+    transition: background .2s, color .2s, transform .15s;
+  }
+
+  .skill-tag:hover {
+    background: var(--pink-deep);
+    color: var(--white);
+    border-color: var(--pink-deep);
+    transform: translateY(-2px);
+  }
+
+  .skill-tag.green {
+    border-color: var(--green-mid);
+    color: var(--green-dark);
+  }
+
+  .skill-tag.green:hover {
+    background: var(--green-deep);
+    color: var(--white);
+    border-color: var(--green-deep);
+  }
+
+  /* ── RESOURCES ── */
+  #resources { background: var(--white); }
+
+  .resources-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; max-width: 780px; }
+
+  .resource-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .9rem;
+    background: var(--cream);
+    border: 1.5px solid var(--green-light);
+    border-radius: 14px;
+    padding: .9rem 1.1rem;
+    transition: border-color .2s, box-shadow .2s;
+  }
+
+  .resource-item:hover {
+    border-color: var(--green-mid);
+    box-shadow: 0 4px 16px rgba(46,125,50,.08);
+  }
+
+  .resource-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--green-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .resource-text { flex: 1; }
+  .resource-text strong { display: block; font-size: .88rem; color: var(--green-dark); margin-bottom: .15rem; }
+  .resource-text span { font-size: .8rem; color: var(--text-muted); }
+
+  .ai-note {
+    margin-top: 1.5rem;
+    background: var(--pink-light);
+    border: 1.5px solid var(--pink-mid);
+    border-radius: 14px;
+    padding: .9rem 1.2rem;
+    font-size: .83rem;
+    color: var(--pink-dark);
+    max-width: 780px;
+    display: flex;
+    gap: .7rem;
+    align-items: flex-start;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: linear-gradient(135deg, var(--green-dark), var(--pink-dark));
+    color: var(--white);
+    text-align: center;
+    padding: 2.5rem 2rem;
+  }
+
+  footer .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: .3rem;
+  }
+
+  footer .footer-meta {
+    font-size: .82rem;
+    opacity: .75;
+    margin-bottom: .8rem;
+  }
+
+  footer .footer-heart {
+    font-size: .8rem;
+    opacity: .55;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav aria-label="Main navigation">
+  <a href="#home" class="nav-brand">Bloom<span>It</span> 🌸</a>
+  <button class="hamburger" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#labs">Labs</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<header id="home">
+  <div class="container">
+    <div class="hero-badge">Mobile Application Development — e-Portfolio</div>
+    <h1 class="hero-title"><em>BloomIt</em><br>Smart Plant Companion</h1>
+    <p class="hero-sub">A gardening app for flower identification, weather monitoring, and plant care — built progressively across 5 labs and 2 full projects.</p>
+    <div class="hero-meta">
+      <span class="meta-chip">👩‍💻 Nurul Izzati Binti Abdul Amas</span>
+      <span class="meta-chip">🎓 A210349</span>
+      <span class="meta-chip">💻 Software Engineering</span>
+      <span class="meta-chip">🧑‍🏫 Dr. Nazatul Aini Binti Abd Majid</span>
+    </div>
+    <div class="sdg-box">
+      <span class="sdg-icon">🌿</span>
+      <div>
+        <strong>SDG 15 — Life on Land</strong>
+        <p>BloomIt promotes plant conservation and environmental sustainability by helping users identify, monitor, and care for plants, contributing to the protection of terrestrial ecosystems.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── LABS ── -->
+<section id="labs">
+  <div class="container">
+    <span class="section-label">Lab Work</span>
+    <h2 class="section-title">Progressive Lab Journey</h2>
+
+    <div class="timeline">
+
+      <!-- LAB 1 -->
+      <div class="lab-card">
+        <div class="lab-node" aria-label="Lab 1">1</div>
+        <div class="lab-body">
+          <h3>Lab 1 — User Interface</h3>
+          <span class="lab-tag">Jetpack Compose · Layouts</span>
+          <div class="video-wrap" role="region" aria-label="Lab 1 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube link to be added</span>
+            </div>
+          </div>
+          <p class="reflection">In Lab 1, I built the foundational UI for a Plant Tracker app using Jetpack Compose, practising layouts like Column, Row, and Box to structure a home screen with a header, summary card, and static plant list. I learned how to define a custom brand colour palette and apply it consistently across composables. This lab helped me understand the declarative UI paradigm in Compose and how to build a clean, readable screen without XML.</p>
+        </div>
+      </div>
+
+      <!-- LAB 2 -->
+      <div class="lab-card">
+        <div class="lab-node" aria-label="Lab 2">2</div>
+        <div class="lab-body">
+          <h3>Lab 2 — Interaction & State</h3>
+          <span class="lab-tag">remember · mutableStateOf · LazyColumn</span>
+          <div class="video-wrap" role="region" aria-label="Lab 2 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube link to be added</span>
+            </div>
+          </div>
+          <p class="reflection">Lab 2 introduced state management with remember and mutableStateOf, allowing me to build a dynamic plant list where users can add new plants through an OutlinedTextField and a button. I implemented a LazyColumn to efficiently render the growing list and updated the summary card count reactively. This taught me how user interactions drive UI recomposition in Compose.</p>
+        </div>
+      </div>
+
+      <!-- LAB 3 -->
+      <div class="lab-card">
+        <div class="lab-node" aria-label="Lab 3">3</div>
+        <div class="lab-body">
+          <h3>Lab 3 — Material Design 3</h3>
+          <span class="lab-tag">Material Theme · Animations · Color.kt</span>
+          <div class="video-wrap" role="region" aria-label="Lab 3 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube link to be added</span>
+            </div>
+          </div>
+          <p class="reflection">In Lab 3, I applied Material Design 3 theming by defining a full custom colour scheme through Color.kt and Theme.kt, and added expand/collapse animations to plant cards using animateContentSize with a spring animation spec. I also wrapped the app in a proper MaterialTheme composable, ensuring consistent token-based styling throughout. This lab showed me how Material 3's theming system makes it easy to create a polished, branded look.</p>
+        </div>
+      </div>
+
+      <!-- LAB 4 -->
+      <div class="lab-card">
+        <div class="lab-node" aria-label="Lab 4">4</div>
+        <div class="lab-body">
+          <h3>Lab 4 — Navigation</h3>
+          <span class="lab-tag">NavHost · NavController · ViewModel</span>
+          <div class="video-wrap" role="region" aria-label="Lab 4 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube link to be added</span>
+            </div>
+          </div>
+          <p class="reflection">Lab 4 introduced multi-screen navigation using NavHost and NavController, with screens for Login, Home, Add Plant, Detail, Profile, and Settings, and a BottomNavigationBar that hides on the login screen. I also implemented a simple AuthViewModel to manage login state and a PlantViewModel with an in-memory plant list shared across screens. This lab made me appreciate how navigation and state management work together in a real app architecture.</p>
+        </div>
+      </div>
+
+      <!-- LAB 5 -->
+      <div class="lab-card">
+        <div class="lab-node" aria-label="Lab 5">5</div>
+        <div class="lab-body">
+          <h3>Lab 5 — Room Database</h3>
+          <span class="lab-tag">Room · @Entity · @Dao · Flow · CRUD</span>
+          <div class="video-wrap" role="region" aria-label="Lab 5 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube link to be added</span>
+            </div>
+          </div>
+          <p class="reflection">Lab 5 extended the navigation app with Room database persistence, defining a Plant entity with @Entity, a PlantDao with @Insert, @Delete, @Update, and a Flow-based getAllPlants() query, and a PlantRepository to abstract database access. I added a full Update screen and wired the PlantViewModel to collect the Room Flow as Compose state, so the UI updates automatically on any change. This lab gave me hands-on experience with the full CRUD lifecycle using Room and Kotlin Coroutines.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <span class="section-label">Projects</span>
+    <h2 class="section-title">BloomIt — Built in Two Phases</h2>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 -->
+      <article class="project-card">
+        <div class="project-header">
+          <p class="proj-num">Project 01 · Lab 4 + Working Features</p>
+          <h3>BloomIt 🌸</h3>
+        </div>
+        <div class="project-body">
+          <div class="problem-box">
+            <strong>Problem Statement</strong>
+            Plant enthusiasts often forget care routines and lose track of their collection. This app gives users a personal garden journal where they can log, explore, and manage their plants with navigation across dedicated screens.
+          </div>
+          <div class="video-wrap" role="region" aria-label="Project 1 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube VSR link to be added</span>
+            </div>
+          </div>
+          <div class="lessons-box">
+            <strong>Lessons Learned</strong>
+            Building Project 1 taught me how to integrate multiple screens into a cohesive app with proper back-stack management, including passing data (plant name) as a navigation argument to the Detail screen. I learned to separate data concerns by using a PlantViewModel with a shared mutable state list and an ExploreData file for curated flower content. I also gained confidence structuring a multi-screen Jetpack Compose app following a clean component/data/viewmodel folder convention.
+          </div>
+          <div class="proj-actions">
+            <a href="#" class="btn btn-pink" aria-label="Watch Project 1 demo on YouTube">▶ Watch Demo</a>
+            <a href="#" class="btn btn-green" aria-label="View Project 1 source on GitHub">⌥ GitHub Repo</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 -->
+      <article class="project-card">
+        <div class="project-header">
+          <p class="proj-num">Project 02 · Lab 5 + API + Sensors + Cloud</p>
+          <h3>BloomIt Pro 🌿</h3>
+        </div>
+        <div class="project-body">
+          <div class="problem-box">
+            <strong>Problem Statement</strong>
+            Plant care is often guesswork; users need real-time environmental data and smart identification tools to care for plants properly. This app combines Room-persisted plant journaling with live weather data, AI-powered flower identification via camera, and a Firebase Firestore community garden board.
+          </div>
+          <div class="video-wrap" role="region" aria-label="Project 2 video demo">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+              <span>YouTube VSR link to be added</span>
+            </div>
+          </div>
+          <div class="lessons-box">
+            <strong>Lessons Learned</strong>
+            Project 2 pushed me to integrate multiple external systems — the Plant.id API for image-based flower identification, the OpenWeatherMap API triggered by GPS coordinates, and Firebase Firestore with real-time listeners for the community screen. I learned to manage multiple StateFlow-based ViewModels running network calls on Dispatchers.IO inside viewModelScope, and handle Android camera access via FileProvider. Combining local Room storage with cloud Firestore also taught me to think carefully about which data belongs locally and which should be shared.
+          </div>
+          <div class="proj-actions">
+            <a href="#" class="btn btn-pink" aria-label="Watch Project 2 demo on YouTube">▶ Watch Demo</a>
+            <a href="#" class="btn btn-green" aria-label="View Project 2 source on GitHub">⌥ GitHub Repo</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── REFLECTION ── -->
+<section id="reflection">
+  <div class="container">
+    <span class="section-label">Reflection</span>
+    <h2 class="section-title">Learning Journey</h2>
+    <p class="reflection-prose">
+      This course took me from building a single static screen to a full multi-feature Android app with cloud integration, covering the complete Jetpack Compose stack in progression. Each lab built directly on the previous one — UI → state → theming → navigation → persistence — which made each new concept feel natural rather than overwhelming. The project phase was where everything clicked: having to connect a camera, a REST API, GPS sensors, and Firebase Firestore in one app forced me to think architecturally about ViewModels, coroutines, and data flow. I leave this course with a real working app and a solid foundation for professional Android development.
+    </p>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="container">
+    <span class="section-label">Tech Stack</span>
+    <h2 class="section-title">Skills & Technologies</h2>
+    <div class="skills-cloud" role="list" aria-label="Skills and technologies used">
+      <span class="skill-tag" role="listitem">Kotlin</span>
+      <span class="skill-tag green" role="listitem">Jetpack Compose</span>
+      <span class="skill-tag" role="listitem">Material Design 3</span>
+      <span class="skill-tag green" role="listitem">Compose Navigation</span>
+      <span class="skill-tag" role="listitem">ViewModel</span>
+      <span class="skill-tag green" role="listitem">StateFlow</span>
+      <span class="skill-tag" role="listitem">Coroutines</span>
+      <span class="skill-tag green" role="listitem">Room Database</span>
+      <span class="skill-tag" role="listitem">Repository Pattern</span>
+      <span class="skill-tag green" role="listitem">LazyColumn</span>
+      <span class="skill-tag" role="listitem">Custom Theming</span>
+      <span class="skill-tag green" role="listitem">BottomNavigationBar</span>
+      <span class="skill-tag" role="listitem">Plant.id API</span>
+      <span class="skill-tag green" role="listitem">OpenWeatherMap API</span>
+      <span class="skill-tag" role="listitem">Firebase Firestore</span>
+      <span class="skill-tag green" role="listitem">Firebase Authentication</span>
+      <span class="skill-tag" role="listitem">CameraX / FileProvider</span>
+      <span class="skill-tag green" role="listitem">GPS (FusedLocationProvider)</span>
+      <span class="skill-tag" role="listitem">Android Permissions</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESOURCES ── -->
+<section id="resources">
+  <div class="container">
+    <span class="section-label">References</span>
+    <h2 class="section-title">APIs, Libraries & Resources</h2>
+
+    <ul class="resources-list" aria-label="List of resources and libraries used">
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🌺</div>
+        <div class="resource-text">
+          <strong>Plant.id API v2</strong>
+          <span>https://api.plant.id/v2/identify — Used for flower identification from base64-encoded camera images in Project 2.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🌤️</div>
+        <div class="resource-text">
+          <strong>OpenWeatherMap API v2.5</strong>
+          <span>https://api.openweathermap.org/data/2.5/weather — Used for real-time weather by GPS coordinates in Project 2.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🔥</div>
+        <div class="resource-text">
+          <strong>Firebase Firestore (BOM 33.7.0)</strong>
+          <span>Used for the Community Garden shared plant board with real-time listeners in Project 2.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🔐</div>
+        <div class="resource-text">
+          <strong>Firebase Authentication (KTX)</strong>
+          <span>Used for login state management in Project 2.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">📍</div>
+        <div class="resource-text">
+          <strong>Google Play Services Location 21.3.0</strong>
+          <span>Used to obtain device GPS coordinates for weather fetching.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🗄️</div>
+        <div class="resource-text">
+          <strong>AndroidX Room (KSP compiler)</strong>
+          <span>Used for local plant database with full CRUD in Lab 5 and both projects.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🧭</div>
+        <div class="resource-text">
+          <strong>AndroidX Navigation Compose 2.8.5</strong>
+          <span>Used for screen navigation from Lab 4 onwards.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">⚙️</div>
+        <div class="resource-text">
+          <strong>AndroidX Lifecycle / ViewModel Compose 2.8.7</strong>
+          <span>Used across all projects for state management.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🎨</div>
+        <div class="resource-text">
+          <strong>Material Icons Extended 1.7.6</strong>
+          <span>Used for icon assets throughout the UI.</span>
+        </div>
+      </li>
+      <li class="resource-item">
+        <div class="resource-icon" aria-hidden="true">🔄</div>
+        <div class="resource-text">
+          <strong>Kotlinx Coroutines Play Services 1.9.0</strong>
+          <span>Used for Firebase suspend/await interop.</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="ai-note" role="note" aria-label="AI assistance disclosure">
+      <span style="font-size:1.2rem">🤖</span>
+      <span><strong>AI Assistance Disclosure:</strong> Claude (Anthropic) was used to help fix code issues, improve interfaces, and assist in generating portfolio content and reflections based on submitted source code.</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p class="footer-name">Nurul Izzati Binti Abdul Amas</p>
+  <p class="footer-meta">A210349 · Software Engineering · Dr. Nazatul Aini Binti Abd Majid</p>
+  <p class="footer-heart">Made with 🌸 & 🌿 · 2025</p>
+</footer>
+
+</body>
+</html>

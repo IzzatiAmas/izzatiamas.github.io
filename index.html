@@ -93,6 +93,11 @@
       gap: .8rem;
     }
     .nav-links.open { display: flex; }
+    .timeline-row,
+    .timeline-row.row-2 {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
   }
 
   /* ── HERO ── */
@@ -220,21 +225,24 @@
 
   .timeline { position: relative; padding-left: 0; }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 28px;
-    top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--pink-mid), var(--green-mid));
-    border-radius: 3px;
+  .timeline-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-row.row-2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 75%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .lab-card {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 0 1.5rem;
-    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
     position: relative;
   }
 
@@ -254,8 +262,6 @@
     box-shadow: 0 4px 16px rgba(194,24,91,.25);
     position: relative;
     z-index: 1;
-    align-self: start;
-    margin-top: .15rem;
   }
 
   .lab-body {
@@ -265,6 +271,7 @@
     padding: 1.5rem;
     box-shadow: 0 2px 12px rgba(0,0,0,.04);
     transition: box-shadow .25s, transform .25s;
+    height: 100%;
   }
 
   .lab-body:hover {
@@ -295,8 +302,10 @@
     aspect-ratio: 16/9;
     border-radius: 12px;
     overflow: hidden;
-    background: var(--pink-light);
+    background: #000;
     margin: .9rem 0;
+    position: relative;
+    cursor: pointer;
   }
 
   .video-wrap iframe {
@@ -304,7 +313,63 @@
     height: 100%;
     border: none;
     display: block;
+    position: absolute;
+    inset: 0;
   }
+
+  /* ── YouTube thumbnail cover ── */
+  .yt-cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    transition: opacity .3s;
+  }
+
+  .yt-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .85;
+    transition: opacity .3s;
+  }
+
+  .yt-cover:hover img { opacity: 1; }
+
+  .yt-play-btn {
+    position: relative;
+    z-index: 2;
+    width: 68px;
+    height: 48px;
+    background: #FF0000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,.5);
+    transition: transform .2s, background .2s;
+    flex-shrink: 0;
+  }
+
+  .yt-cover:hover .yt-play-btn {
+    transform: scale(1.1);
+    background: #cc0000;
+  }
+
+  .yt-play-btn svg {
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+    margin-left: 4px;
+  }
+
+  .yt-cover.hidden { display: none; }
 
   .reflection {
     font-size: .88rem;
@@ -607,14 +672,19 @@
 
     <div class="timeline">
 
+      <div class="timeline-row row-1">
+
       <!-- LAB 1 -->
       <div class="lab-card">
         <div class="lab-node" aria-label="Lab 1">1</div>
         <div class="lab-body">
           <h3>Lab 1 — User Interface</h3>
           <span class="lab-tag">Jetpack Compose · Layouts</span>
-          <div class="video-wrap" role="region" aria-label="Lab 1 video demo">
-            <iframe src="https://www.youtube.com/embed/wLxS0ulHZGc" title="Lab 1 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Lab 1 video demo" onclick="playVideo(this,'wLxS0ulHZGc')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/wLxS0ulHZGc/maxresdefault.jpg" alt="Lab 1 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/wLxS0ulHZGc/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <p class="reflection">In Lab 1, I built the foundational UI for a Plant Tracker app using Jetpack Compose, practising layouts like Column, Row, and Box to structure a home screen with a header, summary card, and static plant list. I learned how to define a custom brand colour palette and apply it consistently across composables. This lab helped me understand the declarative UI paradigm in Compose and how to build a clean, readable screen without XML.</p>
         </div>
@@ -626,8 +696,11 @@
         <div class="lab-body">
           <h3>Lab 2 — Interaction & State</h3>
           <span class="lab-tag">remember · mutableStateOf · LazyColumn</span>
-          <div class="video-wrap" role="region" aria-label="Lab 2 video demo">
-            <iframe src="https://www.youtube.com/embed/M-AsUXgE_hQ" title="Lab 2 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Lab 2 video demo" onclick="playVideo(this,'M-AsUXgE_hQ')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/M-AsUXgE_hQ/maxresdefault.jpg" alt="Lab 2 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/M-AsUXgE_hQ/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <p class="reflection">Lab 2 introduced state management with remember and mutableStateOf, allowing me to build a dynamic plant list where users can add new plants through an OutlinedTextField and a button. I implemented a LazyColumn to efficiently render the growing list and updated the summary card count reactively. This taught me how user interactions drive UI recomposition in Compose.</p>
         </div>
@@ -639,12 +712,19 @@
         <div class="lab-body">
           <h3>Lab 3 — Material Design 3</h3>
           <span class="lab-tag">Material Theme · Animations · Color.kt</span>
-          <div class="video-wrap" role="region" aria-label="Lab 3 video demo">
-            <iframe src="https://www.youtube.com/embed/JxH1YpM89H4" title="Lab 3 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Lab 3 video demo" onclick="playVideo(this,'JxH1YpM89H4')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/JxH1YpM89H4/maxresdefault.jpg" alt="Lab 3 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/JxH1YpM89H4/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <p class="reflection">In Lab 3, I applied Material Design 3 theming by defining a full custom colour scheme through Color.kt and Theme.kt, and added expand/collapse animations to plant cards using animateContentSize with a spring animation spec. I also wrapped the app in a proper MaterialTheme composable, ensuring consistent token-based styling throughout. This lab showed me how Material 3's theming system makes it easy to create a polished, branded look.</p>
         </div>
       </div>
+
+      </div>
+
+      <div class="timeline-row row-2">
 
       <!-- LAB 4 -->
       <div class="lab-card">
@@ -652,8 +732,11 @@
         <div class="lab-body">
           <h3>Lab 4 — Navigation</h3>
           <span class="lab-tag">NavHost · NavController · ViewModel</span>
-          <div class="video-wrap" role="region" aria-label="Lab 4 video demo">
-            <iframe src="https://www.youtube.com/embed/5nvqTj4GC8U" title="Lab 4 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Lab 4 video demo" onclick="playVideo(this,'5nvqTj4GC8U')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/5nvqTj4GC8U/maxresdefault.jpg" alt="Lab 4 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/5nvqTj4GC8U/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <p class="reflection">Lab 4 introduced multi-screen navigation using NavHost and NavController, with screens for Login, Home, Add Plant, Detail, Profile, and Settings, and a BottomNavigationBar that hides on the login screen. I also implemented a simple AuthViewModel to manage login state and a PlantViewModel with an in-memory plant list shared across screens. This lab made me appreciate how navigation and state management work together in a real app architecture.</p>
         </div>
@@ -665,11 +748,16 @@
         <div class="lab-body">
           <h3>Lab 5 — Room Database</h3>
           <span class="lab-tag">Room · @Entity · @Dao · Flow · CRUD</span>
-          <div class="video-wrap" role="region" aria-label="Lab 5 video demo">
-            <iframe src="https://www.youtube.com/embed/k_fr_UHDOAs" title="Lab 5 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Lab 5 video demo" onclick="playVideo(this,'k_fr_UHDOAs')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/k_fr_UHDOAs/maxresdefault.jpg" alt="Lab 5 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/k_fr_UHDOAs/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <p class="reflection">Lab 5 extended the navigation app with Room database persistence, defining a Plant entity with @Entity, a PlantDao with @Insert, @Delete, @Update, and a Flow-based getAllPlants() query, and a PlantRepository to abstract database access. I added a full Update screen and wired the PlantViewModel to collect the Room Flow as Compose state, so the UI updates automatically on any change. This lab gave me hands-on experience with the full CRUD lifecycle using Room and Kotlin Coroutines.</p>
         </div>
+      </div>
+
       </div>
 
     </div>
@@ -695,8 +783,11 @@
             <strong>Problem Statement</strong>
             Plant enthusiasts often forget care routines and lose track of their collection. This app gives users a personal garden journal where they can log, explore, and manage their plants with navigation across dedicated screens.
           </div>
-          <div class="video-wrap" role="region" aria-label="Project 1 video demo">
-            <iframe src="https://www.youtube.com/embed/IUJlmSZnZd0" title="Project 1 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Project 1 video demo" onclick="playVideo(this,'IUJlmSZnZd0')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/IUJlmSZnZd0/maxresdefault.jpg" alt="Project 1 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/IUJlmSZnZd0/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <div class="lessons-box">
             <strong>Lessons Learned</strong>
@@ -720,8 +811,11 @@
             <strong>Problem Statement</strong>
             Plant care is often guesswork; users need real-time environmental data and smart identification tools to care for plants properly. This app combines Room-persisted plant journaling with live weather data, AI-powered flower identification via camera, and a Firebase Firestore community garden board.
           </div>
-          <div class="video-wrap" role="region" aria-label="Project 2 video demo">
-            <iframe src="https://www.youtube.com/embed/Ha6S2XakdXE" title="Project 2 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-wrap" role="region" aria-label="Project 2 video demo" onclick="playVideo(this,'Ha6S2XakdXE')">
+            <div class="yt-cover">
+              <img src="https://img.youtube.com/vi/Ha6S2XakdXE/maxresdefault.jpg" alt="Project 2 Demo thumbnail" onerror="this.src='https://img.youtube.com/vi/Ha6S2XakdXE/hqdefault.jpg'">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
           <div class="lessons-box">
             <strong>Lessons Learned</strong>
@@ -872,5 +966,23 @@
   <p class="footer-heart">Made with 🌸 & 🌿 · 2025</p>
 </footer>
 
+<script>
+  function playVideo(wrap, videoId) {
+    // Hide the cover
+    const cover = wrap.querySelector('.yt-cover');
+    if (cover) cover.classList.add('hidden');
+    // Create and insert iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+    iframe.title = 'YouTube video player';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+    wrap.appendChild(iframe);
+    // Remove click handler so it doesn't fire again
+    wrap.onclick = null;
+    wrap.style.cursor = 'default';
+  }
+</script>
 </body>
 </html>

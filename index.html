@@ -297,9 +297,6 @@
     overflow: hidden;
     background: var(--pink-light);
     margin: .9rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .video-wrap iframe {
@@ -307,29 +304,6 @@
     height: 100%;
     border: none;
     display: block;
-  }
-
-  .video-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    color: var(--pink-deep);
-    font-size: .82rem;
-    font-weight: 500;
-    width: 100%;
-    height: 100%;
-    min-height: 160px;
-  }
-
-  .video-placeholder .play-icon {
-    width: 52px; height: 52px;
-    background: var(--pink-deep);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: white;
-    font-size: 1.3rem;
   }
 
   .reflection {
@@ -640,10 +614,7 @@
           <h3>Lab 1 — User Interface</h3>
           <span class="lab-tag">Jetpack Compose · Layouts</span>
           <div class="video-wrap" role="region" aria-label="Lab 1 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>https://youtu.be/wLxS0ulHZGc</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/wLxS0ulHZGc" title="Lab 1 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <p class="reflection">In Lab 1, I built the foundational UI for a Plant Tracker app using Jetpack Compose, practising layouts like Column, Row, and Box to structure a home screen with a header, summary card, and static plant list. I learned how to define a custom brand colour palette and apply it consistently across composables. This lab helped me understand the declarative UI paradigm in Compose and how to build a clean, readable screen without XML.</p>
         </div>
@@ -656,10 +627,7 @@
           <h3>Lab 2 — Interaction & State</h3>
           <span class="lab-tag">remember · mutableStateOf · LazyColumn</span>
           <div class="video-wrap" role="region" aria-label="Lab 2 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>YouTube link to be added</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/M-AsUXgE_hQ" title="Lab 2 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <p class="reflection">Lab 2 introduced state management with remember and mutableStateOf, allowing me to build a dynamic plant list where users can add new plants through an OutlinedTextField and a button. I implemented a LazyColumn to efficiently render the growing list and updated the summary card count reactively. This taught me how user interactions drive UI recomposition in Compose.</p>
         </div>
@@ -672,10 +640,7 @@
           <h3>Lab 3 — Material Design 3</h3>
           <span class="lab-tag">Material Theme · Animations · Color.kt</span>
           <div class="video-wrap" role="region" aria-label="Lab 3 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>YouTube link to be added</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/JxH1YpM89H4" title="Lab 3 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <p class="reflection">In Lab 3, I applied Material Design 3 theming by defining a full custom colour scheme through Color.kt and Theme.kt, and added expand/collapse animations to plant cards using animateContentSize with a spring animation spec. I also wrapped the app in a proper MaterialTheme composable, ensuring consistent token-based styling throughout. This lab showed me how Material 3's theming system makes it easy to create a polished, branded look.</p>
         </div>
@@ -688,10 +653,7 @@
           <h3>Lab 4 — Navigation</h3>
           <span class="lab-tag">NavHost · NavController · ViewModel</span>
           <div class="video-wrap" role="region" aria-label="Lab 4 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>YouTube link to be added</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/5nvqTj4GC8U" title="Lab 4 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <p class="reflection">Lab 4 introduced multi-screen navigation using NavHost and NavController, with screens for Login, Home, Add Plant, Detail, Profile, and Settings, and a BottomNavigationBar that hides on the login screen. I also implemented a simple AuthViewModel to manage login state and a PlantViewModel with an in-memory plant list shared across screens. This lab made me appreciate how navigation and state management work together in a real app architecture.</p>
         </div>
@@ -704,10 +666,7 @@
           <h3>Lab 5 — Room Database</h3>
           <span class="lab-tag">Room · @Entity · @Dao · Flow · CRUD</span>
           <div class="video-wrap" role="region" aria-label="Lab 5 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>YouTube link to be added</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/k_fr_UHDOAs" title="Lab 5 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <p class="reflection">Lab 5 extended the navigation app with Room database persistence, defining a Plant entity with @Entity, a PlantDao with @Insert, @Delete, @Update, and a Flow-based getAllPlants() query, and a PlantRepository to abstract database access. I added a full Update screen and wired the PlantViewModel to collect the Room Flow as Compose state, so the UI updates automatically on any change. This lab gave me hands-on experience with the full CRUD lifecycle using Room and Kotlin Coroutines.</p>
         </div>
@@ -737,18 +696,15 @@
             Plant enthusiasts often forget care routines and lose track of their collection. This app gives users a personal garden journal where they can log, explore, and manage their plants with navigation across dedicated screens.
           </div>
           <div class="video-wrap" role="region" aria-label="Project 1 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>YouTube VSR link to be added</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/IUJlmSZnZd0" title="Project 1 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="lessons-box">
             <strong>Lessons Learned</strong>
             Building Project 1 taught me how to integrate multiple screens into a cohesive app with proper back-stack management, including passing data (plant name) as a navigation argument to the Detail screen. I learned to separate data concerns by using a PlantViewModel with a shared mutable state list and an ExploreData file for curated flower content. I also gained confidence structuring a multi-screen Jetpack Compose app following a clean component/data/viewmodel folder convention.
           </div>
           <div class="proj-actions">
-            <a href="#" class="btn btn-pink" aria-label="Watch Project 1 demo on YouTube">▶ Watch Demo</a>
-            <a href="#" class="btn btn-green" aria-label="View Project 1 source on GitHub">⌥ GitHub Repo</a>
+            <a href="https://www.youtube.com/watch?v=IUJlmSZnZd0" target="_blank" rel="noopener noreferrer" class="btn btn-pink" aria-label="Watch Project 1 demo on YouTube">▶ Watch Demo</a>
+            <a href="https://github.com/IzzatiAmas/A210349_Izzati_DrNazatul_Project1" target="_blank" rel="noopener noreferrer" class="btn btn-green" aria-label="View Project 1 source on GitHub">⌥ GitHub Repo</a>
           </div>
         </div>
       </article>
@@ -765,18 +721,15 @@
             Plant care is often guesswork; users need real-time environmental data and smart identification tools to care for plants properly. This app combines Room-persisted plant journaling with live weather data, AI-powered flower identification via camera, and a Firebase Firestore community garden board.
           </div>
           <div class="video-wrap" role="region" aria-label="Project 2 video demo">
-            <div class="video-placeholder">
-              <div class="play-icon">▶</div>
-              <span>YouTube VSR link to be added</span>
-            </div>
+            <iframe src="https://www.youtube.com/embed/Ha6S2XakdXE" title="Project 2 Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="lessons-box">
             <strong>Lessons Learned</strong>
             Project 2 pushed me to integrate multiple external systems — the Plant.id API for image-based flower identification, the OpenWeatherMap API triggered by GPS coordinates, and Firebase Firestore with real-time listeners for the community screen. I learned to manage multiple StateFlow-based ViewModels running network calls on Dispatchers.IO inside viewModelScope, and handle Android camera access via FileProvider. Combining local Room storage with cloud Firestore also taught me to think carefully about which data belongs locally and which should be shared.
           </div>
           <div class="proj-actions">
-            <a href="#" class="btn btn-pink" aria-label="Watch Project 2 demo on YouTube">▶ Watch Demo</a>
-            <a href="#" class="btn btn-green" aria-label="View Project 2 source on GitHub">⌥ GitHub Repo</a>
+            <a href="https://www.youtube.com/watch?v=Ha6S2XakdXE" target="_blank" rel="noopener noreferrer" class="btn btn-pink" aria-label="Watch Project 2 demo on YouTube">▶ Watch Demo</a>
+            <a href="https://github.com/IzzatiAmas/A210349_Izzati_DrNazatul_Project2" target="_blank" rel="noopener noreferrer" class="btn btn-green" aria-label="View Project 2 source on GitHub">⌥ GitHub Repo</a>
           </div>
         </div>
       </article>
